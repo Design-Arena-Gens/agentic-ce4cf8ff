@@ -1,0 +1,194 @@
+/* CSS variables for light and dark themes */
+:root {
+  --bg: #0f0a1a;
+  --bg-elev: #1a112b;
+  --text: #eae6f7;
+  --muted: #bfb6da;
+  --accent: #b793f9;
+  --accent-2: #5e3dbf;
+  --card: #130c22;
+  --card-border: rgba(255,255,255,0.08);
+  --shadow: rgba(0,0,0,0.6);
+}
+
+[data-theme="light"] {
+  --bg: #faf8ff;
+  --bg-elev: #ffffff;
+  --text: #1c1236;
+  --muted: #4a3f69;
+  --accent: #6b4fd6;
+  --accent-2: #a58cff;
+  --card: #ffffff;
+  --card-border: rgba(0,0,0,0.08);
+  --shadow: rgba(0,0,0,0.16);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: radial-gradient(1200px 800px at 70% -10%, rgba(183,147,249,0.15), transparent 60%) , var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.title-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 6px 18px -6px var(--shadow);
+}
+
+.controls-bar {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .controls-bar { grid-template-columns: 1fr 1fr; }
+}
+
+.card-table {
+  position: relative;
+  margin-top: 20px;
+  background: radial-gradient(800px 500px at 50% -10%, rgba(255,255,255,0.06), transparent 55%), var(--bg-elev);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  min-height: 520px;
+  padding: 18px;
+  box-shadow: 0 10px 30px -10px var(--shadow);
+  overflow: hidden;
+}
+
+.bottom-bar {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.button {
+  appearance: none;
+  border: 1px solid var(--card-border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.02));
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 200ms ease;
+  box-shadow: 0 6px 18px -10px var(--shadow) inset, 0 6px 18px -8px transparent;
+}
+.button:hover { transform: translateY(-1px); box-shadow: 0 8px 22px -12px var(--shadow); }
+.button:active { transform: translateY(0); }
+
+.input, .select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  background: var(--bg-elev);
+  color: var(--text);
+  outline: none;
+}
+
+.badge {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Card visuals */
+.card-outer {
+  position: absolute;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, left, top;
+}
+.card {
+  width: clamp(120px, 18vw, 220px);
+  aspect-ratio: 5 / 8;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 14px 30px -12px var(--shadow);
+  position: relative;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+.card .face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+.card .front {
+  background: linear-gradient(145deg, rgba(255,255,255,0.06), transparent 55%),
+              radial-gradient(100% 80% at 50% 0%, rgba(255,255,255,0.10), transparent 70%);
+}
+.card .back {
+  transform: rotateY(180deg);
+  background: repeating-linear-gradient(45deg, rgba(183,147,249,0.2), rgba(183,147,249,0.2) 10px, transparent 10px, transparent 20px),
+              linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.card .gloss {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(75deg, rgba(255,255,255,0.25), transparent 30%);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+.card .label {
+  position: absolute;
+  bottom: 10px; left: 12px; right: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+.card .minor-sigil, .card .major-sigil {
+  position: absolute;
+  top: 12px; right: 12px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.sigil-batons { color: #d78426; }
+.sigil-coupes { color: #2ca6c9; }
+.sigil-ep?es { color: #ea536a; }
+.sigil-deniers { color: #9ac24b; }
+
+.deck-pile {
+  position: absolute;
+  left: 12px; bottom: 12px;
+  width: clamp(100px, 14vw, 180px);
+  aspect-ratio: 5 / 8;
+  border-radius: 16px;
+  border: 1px dashed var(--card-border);
+  display: grid; place-items: center;
+  color: var(--muted);
+}
+
+.hint { color: var(--muted); font-size: 12px; }
